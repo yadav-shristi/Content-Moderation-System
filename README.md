@@ -1,14 +1,13 @@
 Content Moderation System
 
 Overview:
-
 The project is a machine learning-based web application that detects toxic, abusive, or harmful text content.
 It uses Natural Language Processing (NLP) techniques and a multi-label classification model to analyze user input in real time.
 This system is designed to simulate how modern social media platforms moderate user-generated content.
 
- Objectives:
-Detect harmful and toxic content automatically
-Classify text into multiple categories
+Objectives:
+Detect harmful and toxic content automatically.
+Classify text into multiple categories.
 
 Features:
 User Login
@@ -19,7 +18,6 @@ Multi-label Classification into categories:
 4. Threat
 5. Insult
 6. Identity Hate
-Analytics Dashboard of content
 
 Workflow:
 1. User enters text in the Streamlit UI
@@ -27,7 +25,7 @@ Workflow:
 3. Backend processes text using TF-IDF
 4. Model predicts toxicity probabilities
 5. Results are returned to frontend
-6. Output is displayed and logged
+6. Output is displayed
 
 Tech Stack:
 Programming: Python
@@ -88,10 +86,9 @@ Future Improvements:
 2. Multilingual support
 3. Real-time streaming using WebSockets
 4. Cloud deployment with database integration
-5. Admin role-based access system
 
 Conclusion:
-This project demonstrates how machine learning and NLP can be used to build scalable and real-time content moderation systems, similar to those used by modern digital platforms.
+This project demonstrates how machine learning and NLP can be used to build scalable and real-time content moderation systems, similar to those used by platforms.
 
 Note: 
 
