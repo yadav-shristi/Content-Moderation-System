@@ -6,10 +6,10 @@ import time
 import pickle
 import numpy as np
 
-with open("toxicity_model.pkl", "rb") as f:
+with open("tdif_vectorizer.pkl", "rb") as f:
     model = pickle.load(f)
 
-with open("tfidf_vectorizer.pkl", "rb") as f:
+with open("toxicity_model.pkl", "rb") as f:
     tfidf = pickle.load(f)
 
 labels = [
