@@ -6,10 +6,16 @@ import time
 import pickle
 import numpy as np
 
-with open("tdif_vectorizer.pkl", "rb") as f:
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+model_path = os.path.join(BASE_DIR, "toxicity_model.pkl")
+tfidf_path = os.path.join(BASE_DIR, "tfidf_vectorizer.pkl")
+st.write("Current Directory:", BASE_DIR)
+st.write("Files here:", os.listdir(BASE_DIR))
+
+with open(model_path, "rb") as f:
     model = pickle.load(f)
 
-with open("toxicity_model.pkl", "rb") as f:
+with open(tfidf_path, "rb") as f:
     tfidf = pickle.load(f)
 
 labels = [
@@ -21,7 +27,7 @@ labels = [
     'identity_hate'
 ]
 
-USER_FILE = "users.json"
+USER_FILE = os.path.join(BASE_DIR, "users.json")
 
 def hash_password(password):
     return hashlib.sha256(password.encode()).hexdigest()
@@ -47,7 +53,7 @@ if "last_text" not in st.session_state:
 
 def login_signup():
 
-    st.title("AI Moderation System")
+    st.title("Moderation System")
 
     menu = st.radio("Select Option", ["Login", "Signup"])
 
@@ -86,7 +92,7 @@ def login_signup():
 
 def main_app():
 
-    st.sidebar.title(f" {st.session_state.username}")
+    st.sidebar.title(f"{st.session_state.username}")
 
     menu = st.sidebar.radio("Navigation", ["Live Moderation", "Logout"])
 
@@ -115,17 +121,16 @@ def main_app():
                     text_vec = tfidf.transform([user_input])
                     prediction = model.predict_proba(text_vec)[0]
 
-                    st.subheader("Results")
+                    st.subheader("📊 Live Results")
 
                     for label, prob in zip(labels, prediction):
                         st.write(f"{label}: {round(prob*100,2)}%")
 
                     overall_score = np.mean(prediction) * 100
 
-                    st.subheader("Overall Score")
+                    st.subheader("⚡ Overall Score")
                     st.write(f"{round(overall_score,2)} / 100")
 
-                    # Risk Levels
                     if overall_score > 60:
                         st.error("🚨 High Risk - Content Blocked")
                         st.markdown(
@@ -134,7 +139,7 @@ def main_app():
                         )
 
                     elif overall_score > 30:
-                        st.warning("Moderately Risk - Be Careful")
+                        st.warning("⚠ Moderate Risk - Be Careful")
 
                     else:
                         st.success("Safe Content")
