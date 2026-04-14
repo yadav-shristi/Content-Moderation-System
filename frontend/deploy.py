@@ -121,18 +121,18 @@ def main_app():
                     text_vec = tfidf.transform([user_input])
                     prediction = model.predict_proba(text_vec)[0]
 
-                    st.subheader("📊 Live Results")
+                    st.subheader("Results")
 
                     for label, prob in zip(labels, prediction):
                         st.write(f"{label}: {round(prob*100,2)}%")
 
                     overall_score = np.mean(prediction) * 100
 
-                    st.subheader("⚡ Overall Score")
+                    st.subheader("Overall Score")
                     st.write(f"{round(overall_score,2)} / 100")
 
                     if overall_score > 60:
-                        st.error("🚨 High Risk - Content Blocked")
+                        st.error("High Risk - Content Blocked")
                         st.markdown(
                             f"<div style='background-color:#ffcccc;padding:10px;border-radius:5px'>{user_input}</div>",
                             unsafe_allow_html=True
