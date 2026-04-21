@@ -44,7 +44,7 @@ if "last_text" not in st.session_state:
     st.session_state.last_text = ""
 
 def login_signup():
-    st.title("AI Moderation System")
+    st.title("Content Moderation System")
     menu = st.radio("Select Option", ["Login", "Signup"])
 
     users = load_users()
